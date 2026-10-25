@@ -12,7 +12,7 @@ test("README documents installation, all commands, and development checks", asyn
       "usage: nodepluck select [--paths] QUERY DOC\n" +
       "usage: nodepluck explain QUERY\n" +
       "usage: nodepluck slice SPEC LENGTH\n" +
-      "usage: nodepluck quote TEXT\n" +
+      "usage: nodepluck quote [--double] TEXT\n" +
       "usage: nodepluck unquote LITERAL\n" +
       "usage: nodepluck check FILE...\n" +
       "```",

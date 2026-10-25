@@ -27,7 +27,7 @@ export function isSingular(query: Query): boolean {
       return false;
     }
     const selector = segment.selectors[0];
-    if (selector.kind !== "name" && selector.kind !== "index") {
+    if (selector === undefined || (selector.kind !== "name" && selector.kind !== "index")) {
       return false;
     }
   }

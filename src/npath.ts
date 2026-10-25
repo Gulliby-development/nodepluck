@@ -7,15 +7,16 @@ import { codePoints } from "./text";
 export type PathComponent = string | number;
 
 /**
- * Quote a member name as a single-quoted path literal, escaping apostrophes,
- * backslashes, and control characters while preserving other Unicode code points.
+ * Quote a member name as a path literal in single quotes (the default) or double
+ * quotes, escaping the quote mark, backslashes, and control characters while
+ * preserving other Unicode code points.
  */
-export function quoteName(text: string): string {
-  let quoted = "'";
+export function quoteName(text: string, mark: "'" | '"' = "'"): string {
+  let quoted: string = mark;
   for (const point of codePoints(text)) {
     const code = point.codePointAt(0);
-    if (point === "'") {
-      quoted += "\\'";
+    if (point === mark) {
+      quoted += `\\${mark}`;
     } else if (point === "\\") {
       quoted += "\\\\";
     } else if (point === "\b") {
@@ -34,7 +35,7 @@ export function quoteName(text: string): string {
       quoted += point;
     }
   }
-  return `${quoted}'`;
+  return `${quoted}${mark}`;
 }
 
 /** Render components in order as a '$'-rooted normalized path. */
