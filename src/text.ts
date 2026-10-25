@@ -84,7 +84,7 @@ export function table(header: string[], rows: string[][]): string[] {
       if (column === columnCount - 1) {
         return cell;
       }
-      const padding = widths[column] - codePoints(cell).length;
+      const padding = (widths[column] ?? 0) - codePoints(cell).length;
       return cell + " ".repeat(padding);
     }).join("  ");
 

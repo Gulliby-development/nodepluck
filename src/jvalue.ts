@@ -86,7 +86,7 @@ export function equal(first: JValue, second: JValue): boolean {
     if (!Array.isArray(second) || first.length !== second.length) {
       return false;
     }
-    return first.every((member, index) => equal(member, second[index]));
+    return first.every((member, index) => equal(member, second[index] ?? null));
   }
   if (!(second instanceof Map) || first.size !== second.size) {
     return false;

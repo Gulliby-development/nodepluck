@@ -33,7 +33,7 @@ function expectRun(run: Runner, args: string[], code: number, stdout: string): v
 test("read commands export their exact usage words", () => {
   expect(explainUsage).toBe("nodepluck explain QUERY");
   expect(sliceUsage).toBe("nodepluck slice SPEC LENGTH");
-  expect(quoteUsage).toBe("nodepluck quote TEXT");
+  expect(quoteUsage).toBe("nodepluck quote [--double] TEXT");
   expect(unquoteUsage).toBe("nodepluck unquote LITERAL");
 });
 
@@ -63,7 +63,7 @@ test.each<{
     label: "quote rejects missing text",
     run: runQuote,
     args: [],
-    failure: "usage: nodepluck quote TEXT",
+    failure: "usage: nodepluck quote [--double] TEXT",
   },
   {
     label: "unquote rejects a missing literal",
@@ -75,7 +75,7 @@ test.each<{
     label: "quote rejects an extra operand",
     run: runQuote,
     args: ["a", "b"],
-    failure: "usage: nodepluck quote TEXT",
+    failure: "usage: nodepluck quote [--double] TEXT",
   },
   {
     label: "explain rejects an extra operand",

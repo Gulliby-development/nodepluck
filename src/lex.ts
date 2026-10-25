@@ -103,7 +103,7 @@ export function scanString(t: readonly string[], i: number): ScanResult<string> 
   let next = i + 1;
   let value = "";
   while (next < t.length) {
-    const current = t[next];
+    const current = t[next] ?? "";
     if (current === quote) {
       return { value, next: next + 1 };
     }
@@ -267,7 +267,7 @@ export function scanInt(t: readonly string[], i: number): ScanResult<number> {
       fault("JP006", i + 1);
     }
     cursor += 1;
-    while (cursor < next && isDigit(t[cursor])) {
+    while (cursor < next && isDigit(t[cursor] ?? "")) {
       cursor += 1;
     }
     if (cursor !== next) {
@@ -297,7 +297,7 @@ export function scanNumber(t: readonly string[], i: number): ScanResult<number> 
 
   if (t[cursor] === "0") {
     cursor += 1;
-    if (cursor < next && isDigit(t[cursor])) {
+    if (cursor < next && isDigit(t[cursor] ?? "")) {
       fault("JP006", i + 1);
     }
   } else {
@@ -305,17 +305,17 @@ export function scanNumber(t: readonly string[], i: number): ScanResult<number> 
       fault("JP006", i + 1);
     }
     cursor += 1;
-    while (cursor < next && isDigit(t[cursor])) {
+    while (cursor < next && isDigit(t[cursor] ?? "")) {
       cursor += 1;
     }
   }
 
   if (cursor < next && t[cursor] === ".") {
     cursor += 1;
-    if (cursor >= next || !isDigit(t[cursor])) {
+    if (cursor >= next || !isDigit(t[cursor] ?? "")) {
       fault("JP006", i + 1);
     }
-    while (cursor < next && isDigit(t[cursor])) {
+    while (cursor < next && isDigit(t[cursor] ?? "")) {
       cursor += 1;
     }
   }
@@ -325,10 +325,10 @@ export function scanNumber(t: readonly string[], i: number): ScanResult<number> 
     if (t[cursor] === "+" || t[cursor] === "-") {
       cursor += 1;
     }
-    if (cursor >= next || !isDigit(t[cursor])) {
+    if (cursor >= next || !isDigit(t[cursor] ?? "")) {
       fault("JP006", i + 1);
     }
-    while (cursor < next && isDigit(t[cursor])) {
+    while (cursor < next && isDigit(t[cursor] ?? "")) {
       cursor += 1;
     }
   }

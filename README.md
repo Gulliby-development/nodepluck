@@ -140,13 +140,26 @@ a network connection or require a service.
 
 ## Commands
 
+`quote` writes a single-quoted literal. With `--double` it writes a double-quoted
+one: a `"` in the text becomes `\"` and a `'` stays as it is; backslashes,
+control characters and every other code point are written as in the single-quoted
+form, and no line feed is added:
+
+```sh
+bun src/main.ts quote --double 'say "hi"'
+```
+
+```text
+"say \"hi\""
+```
+
 The six usage forms, in `--help` order, are:
 
 ```text
 usage: nodepluck select [--paths] QUERY DOC
 usage: nodepluck explain QUERY
 usage: nodepluck slice SPEC LENGTH
-usage: nodepluck quote TEXT
+usage: nodepluck quote [--double] TEXT
 usage: nodepluck unquote LITERAL
 usage: nodepluck check FILE...
 ```

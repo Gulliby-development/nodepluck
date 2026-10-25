@@ -65,10 +65,11 @@ export class MemIo implements Io {
   }
 
   readFile(path: string): Uint8Array {
-    if (!Object.hasOwn(this.files, path)) {
+    const data = Object.hasOwn(this.files, path) ? this.files[path] : undefined;
+    if (data === undefined) {
       throw new Error("file not found");
     }
-    return this.files[path];
+    return data;
   }
 
   out(text: string): void {
